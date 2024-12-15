@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <!DOCTYPE html>
+    <html lang="fr">
+    <head>
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <title>Description du Produit</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet"/>
+        <style>
+            body {
+                font-family: 'Cairo', sans-serif;
+                background: url('path/to/your-background.jpg') no-repeat center center fixed;
+                background-size: cover;
+            }
+            .button {
+                transition: background-color 0.3s ease;
+            }
+            .button:hover {
+                background-color: #3182ce; /* Couleur bleue pour le survol */
+            }
+            header {
+                background-color: #1a1a1a;
+            }
+            .text-green-500 {
+                color: #4CAF50; /* Couleur verte pour les sous-totaux et totaux */
+            }
+            .text-red-500 {
+                color: #f44336; /* Couleur rouge pour la réduction */
+            }
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            .bg-white {
+                background-color: #fff;
+            }
+            .p-4 {
+                padding: 20px;
+            }
+            .rounded {
+                border-radius: 8px;
+            }
+            .shadow-md {
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+        </style>
+<body>
+    <header class="bg-black text-white py-4">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <div class="text-lg font-bold">التوصيل لجميع المدن ب 35 DH فقط</div>
+            <div class="flex items-center space-x-2">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <img src="https://www.raspberrypi.org/app/uploads/2018/03/Raspberry-Pi-Logo.png" alt="Raspberry Pi Logo" class="h-8 w-auto"/>
+                    <span class="text-lg font-bold">SOF-TECH</span>
+                </a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a class="text-yellow-500" href="index.html" aria-label="Aller à la page d'accueil"><i class="fas fa-home"></i></a>
+                <a class="text-yellow-500" href="#" aria-label="Menu"><i class="fas fa-bars"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto py-8">
+        <div id="product-details" class="flex flex-col lg:flex-row items-center">
+            <div class="product-image">
+                <img id="product-image" src="" alt="Image du produit" class="w-full h-auto rounded-lg mb-6" />
+            </div>
+            
+            <div class="product-details">
+                <h2 id="product-name" class="text-2xl font-bold"></h2>
+                <p id="product-price" class="text-xl text-gray-700"></p>
+                <p id="product-description" class="mt-4 text-lg text-gray-700"></p>
+                
+                <div class="mt-6">
+                    <h3 class="text-lg font-semibold">Caractéristiques :</h3>
+                    <ul id="product-features" class="list-disc pl-5 text-gray-700"></ul>
+                </div>
+
+                <button class="add-to-cart mt-6 bg-green-500 text-white p-3 rounded">Ajouter au panier</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-4">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 SOF-TECH. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Liste des produits avec leurs informations
+        const products = {
+            "1": {
+                name: "Raspberry Pi 4",
+                price: "1190 DH",
+                description: "Le Raspberry Pi 4 est un ordinateur à carte unique, puissant et versatile. Il peut être utilisé pour de nombreux projets, du DIY aux applications industrielles.",
+                features: [
+                    "Processeur : Quad-core ARM Cortex-A72",
+                    "Mémoire : 4 Go de RAM",
+                    "Stockage : Micro SD (carte non incluse)",
+                    "Connectivité : Ethernet, Wi-Fi, Bluetooth",
+                    "Ports USB : 2x USB 3.0, 2x USB 2.0",
+                    "Sortie vidéo : HDMI 4K"
+                ],
+                image: "https://placehold.co/500x500"
+            },
+            "2": {
+                name: "Arduino Uno",
+                price: "250 DH",
+                description: "L'Arduino Uno est une carte de développement pour l'électronique open-source, parfaite pour les projets DIY.",
+                features: [
+                    "Processeur : ATmega328P",
+                    "Mémoire : 32 Ko",
+                    "Connectivité : USB",
+                    "Ports : 14 entrées/sorties numériques",
+                    "Entrées analogiques : 6"
+                ],
+                image: "https://placehold.co/500x500"
+            }
+            // Ajouter d'autres produits ici
+        };
+
+        // Récupérer l'ID du produit à partir de l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+
+        // Vérifier si l'ID est valide
+        if (products[productId]) {
+            const product = products[productId];
+
+            // Affichage des détails du produit
+            document.getElementById('product-name').innerText = product.name;
+            document.getElementById('product-price').innerText = product.price;
+            document.getElementById('product-description').innerText = product.description;
+            document.getElementById('product-image').src = product.image;
+
+            // Affichage des caractéristiques du produit
+            const featuresList = document.getElementById('product-features');
+            product.features.forEach(feature => {
+                const li = document.createElement('li');
+                li.textContent = feature;
+                featuresList.appendChild(li);
+            });
+        } else {
+            // Si l'ID n'est pas valide
+            document.getElementById('product-details').innerHTML = "<p>Produit non trouvé.</p>";
+        }
+    </script>
+</body>
+</html>

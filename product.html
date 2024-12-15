@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails du produit</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <a href="index2.html" id="logo">
+            <img src="logo.png" alt="Logo de la boutique" class="logo-img">
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index2.html">Accueil</a></li>
+                <li><a href="cart.html">Panier</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="product-details">
+            <div id="product-image">
+                <img id="product-img" src="" alt="Image du produit" class="product-img">
+            </div>
+            <div id="product-info">
+                <h1 id="product-name" class="product-name"></h1>
+                <p id="product-category" class="product-category"></p>
+                <p id="product-description" class="product-description"></p>
+                <p id="product-price" class="product-price"></p>
+                <button id="add-to-cart" class="add-to-cart-btn">Ajouter au panier</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Votre Boutique</p>
+    </footer>
+
+    <script>
+        // Tableau des produits (depuis index.html)
+        const products = [
+            {
+                name: "Raspberry Pi 4",
+                price: 1190,
+                category: "Raspberry Pi",
+                img: "https://placehold.co/200x300",
+                description: "Un ordinateur monocarte puissant et compact, idéal pour les projets électroniques avancés."
+            },
+            // Ajoute d'autres produits ici si nécessaire
+        ];
+
+        // Récupérer l'ID du produit depuis l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = parseInt(urlParams.get("id"));
+
+        if (productId >= 0 && productId < products.length) {
+            const product = products[productId];
+
+            // Mettre à jour le contenu de la page avec les informations du produit
+            document.getElementById("product-name").textContent = product.name;
+            document.getElementById("product-category").textContent = "Catégorie: " + product.category;
+            document.getElementById("product-description").textContent = product.description;
+            document.getElementById("product-price").textContent = "Prix: " + product.price + " MAD";
+            document.getElementById("product-img").src = product.img;
+        } else {
+            document.getElementById("product-details").innerHTML = "<p>Produit non trouvé.</p>";
+        }
+
+        // Fonction d'ajout au panier
+        document.getElementById("add-to-cart").addEventListener("click", function() {
+            alert("Produit ajouté au panier !");
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="description" content="Découvrez les meilleures offres en ligne pour des produits électroniques tels que Raspberry Pi, Arduino, et accessoires. Livraison rapide prtout au Maroc." />
+    <meta name="keywords" content="Raspberry Pi, Arduino, composants électroniques, accessoires, câbles, matériel informatique, acheter en ligne, livraison rapide, produits électroniques" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="SOF-TECH - Composants électroniques et accessoires" />
+    <meta property="og:description" content="SOF-TECH propose une large gamme de produits électroniques et accessoires pour vos projets Raspberry Pi et Arduino. Profitez de la livraison rapide partout au Maroc." />
+    <meta property="og:image" link rel="icon" href="raspberry_pi-logo-open_source-raspberry-512-2795733357.png" />
+    <meta property="og:url" content="https://www.sof-tech.com" />
+    <meta name="author" content="SOF-TECH" />
+    <title>SOF-TECH - Composants électroniques, Raspberry Pi et Arduino</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: url('path/to/circuit-background.jpg') no-repeat center center fixed; /* Replace with your circuit background image */
+            background-size: cover;
+            color: #333;
+            transition: direction 0.3s ease; /* Smooth transition */
+        }
+
+        /* When Arabic is selected */
+        .rtl {
+            direction: rtl;
+            text-align: right; /* Align text to the right */
+        }
+
+        header {
+            background-color: #1a1a1a; /* Darker background for header */
+        }
+
+        #categoryMenu {
+            display: none;
+        }
+
+        #categoryMenu.show {
+            display: block;
+        }
+
+        #searchInput {
+            color: black;
+        }
+
+        .product {
+            border: 1px solid #ccc; /* Light border */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+            transition: transform 0.2s; /* Smooth transition */
+        }
+
+        .product:hover {
+            transform: scale(1.05); /* Slight zoom on hover */
+        }
+
+        button {
+            background-color: #4CAF50; /* Green button */
+            border: none;
+            border-radius: 5px;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+
+        button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+    <!-- Header -->
+    <header class="bg-black text-white py-4">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <div id="deliveryText" class="text-lg font-bold">
+                Livraison dans toutes les villes pour seulement 35 MAD
+            </div>
+            <div class="flex items-center space-x-2">
+                <img src="raspberry_pi-logo-open_source-raspberry-512-2795733357.png" alt="Raspberry Pi Logo" class="h-8 w-auto" />
+                <a href="index.html"><span class="text-lg font-bold">SOF-TECH</span></a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a class="text-yellow-500" href="index.html" aria-label="Aller à la page d'accueil"><i class="fas fa-home"></i></a>
+                <button onclick="toggleLanguage()">EN / AR</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="bg-white p-4 rounded shadow-md">
+            <table class="w-full text-left">
+                <thead>
+                    <tr class="border-b">
+                        <th class="py-2" id="productText">Produit</th>
+                        <th class="py-2" id="priceText">Prix</th>
+                        <th class="py-2" id="quantityText">Quantité</th>
+                        <th class="py-2" id="subtotalText">Sous-total</th>
+                    </tr>
+                </thead>
+                <tbody id="cartTable">
+                    <!-- Products will be added here dynamically -->
+                </tbody>
+            </table>
+        </div>
+        <div class="bg-white p-4 rounded shadow-md mt-4">
+            <div class="flex justify-between border-b py-2">
+                <span id="subTotalLabel">Sous-total</span>
+                <span id="subTotalAmount">0 DH</span>
+            </div>
+            <div class="flex justify-between border-b py-2">
+                <span id="deliveryFeeLabel">Frais de livraison</span>
+                <span id="deliveryFee">35 DH</span>
+            </div>
+            <div class="flex justify-between border-b py-2">
+                <span id="discountLabel">Réduction</span>
+                <span id="discountAmount"></span>
+            </div>
+            <div class="flex justify-between py-2 font-bold">
+                <span id="totalLabel">Total</span>
+                <span id="totalAmount"> </span>
+            </div>
+            <input type="text" id="discountCode" placeholder="Code de réduction" class="mt-4 p-2 border rounded" aria-label="Code de réduction"/>
+            <button onclick="applyDiscount()" class="button mt-4 py-2 px-4 bg-blue-500 text-white rounded"id ="applyButton">Appliquer</button>
+        </div>
+        <div class="mt-6 flex justify-between">
+            <button onclick="sendWhatsAppOrder()" class="button py-2 px-4 bg-green-500 text-white rounded" id="Whatsapp">Commander via WhatsApp</button>
+        </div>
+    </div>
+
+    <footer class="bg-gray-800 text-white py-4">
+        <div class="container mx-auto text-center">
+            <p id="footer-text">&copy;2024 SOF-TECH. Tous droits réservés.</p>
+            <div class="mt-2">
+                <a href="https://www.facebook.com/garan.karam" class="text-yellow-500 mx-2" id="facebookText">Facebook </a>
+                <a href="https://www.instagram.com/soulaimanehajji/" class="text-yellow-500 mx-2" id="instagramText">Instagram</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let discount = 0;
+        let language = 'ar'; // Default language is Arabic
+
+        function toggleLanguage() {
+            if (language === 'ar') {
+                language = 'fr'; // Switch to French
+            } else {
+                language = 'ar'; // Switch to Arabic
+            }
+            updateLanguage();
+        }
+
+        function updateLanguage() {
+            if (language === 'ar') {
+                document.body.classList.add('rtl'); // Apply RTL layout for Arabic
+                document.getElementById('deliveryText').textContent = 'التوصيل لجميع المدن بـ 35 درهم فقط';
+                document.getElementById('productText').textContent = 'منتج';
+                document.getElementById('priceText').textContent = 'السعر';
+                document.getElementById('quantityText').textContent = 'الكمية';
+                document.getElementById('subtotalText').textContent = 'إجمالي';
+                document.getElementById('subTotalLabel').textContent = 'إجمالي';
+                document.getElementById('deliveryFeeLabel').textContent = 'رسوم الشحن';
+                document.getElementById('discountLabel').textContent = 'خصم';
+                document.getElementById('totalLabel').textContent = 'المجموع';
+                document.getElementById('footer-text').innerHTML = '&copy; 2024 SOF-TECH. جميع الحقوق محفوظة.';
+                document.getElementById('facebookText').textContent = 'فيسبوك';
+                document.getElementById('instagramText').textContent = 'إنستجرام';
+                document.getElementById('Whatsapp').textContent = 'طلب عبر الواتساب';
+                document.getElementById('applyButton').textContent = 'تطبيق';
+                
+            } else {
+                document.body.classList.remove('rtl'); // Remove RTL layout for French
+                document.getElementById('deliveryText').textContent = 'Livraison dans toutes les villes pour seulement 35 MAD';
+                document.getElementById('productText').textContent = 'Produit';
+                document.getElementById('priceText').textContent = 'Prix';
+                document.getElementById('quantityText').textContent = 'Quantité';
+                document.getElementById('subtotalText').textContent = 'Sous-total';
+                document.getElementById('subTotalLabel').textContent = 'Sous-total';
+                document.getElementById('deliveryFeeLabel').textContent = 'Frais de livraison';
+                document.getElementById('discountLabel').textContent = 'Réduction';
+                document.getElementById('totalLabel').textContent = 'Total';
+                document.getElementById('footer-text').innerHTML = '&copy; 2024 SOF-TECH. Tous droits réservés.';
+                document.getElementById('facebookText').textContent = 'Facebook';
+                document.getElementById('instagramText').textContent = 'Instagram';
+                document.getElementById('Whatsapp').textContent = 'Commander Via Whatsapp';
+                document.getElementById('applyButton').textContent = 'Appliquer';
+                
+            }
+        }
+
+        function loadCart() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartTable = document.getElementById('cartTable');
+            let subTotal = 0;
+
+            cartTable.innerHTML = ''; // Vider le contenu avant de recharger le panier
+
+            cart.forEach(function(product, index) {
+                let row = document.createElement('tr');
+                row.classList.add('border-b');
+                
+                row.innerHTML = `
+                    <td class="py-2 flex items-center">
+                        <button onclick="removeItem(${index})" class="text-gray-500 mr-4" aria-label="Supprimer l'article">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <span>${product.name}</span>
+                    </td>
+                    <td class="py-2 text-green-500">${product.price} DH</td>
+                    <td class="py-2">
+                        <div class="flex items-center">
+                            <button onclick="updateQuantity(${index}, -1)" class="px-2 py-1 border" aria-label="Diminuer la quantité">-</button>
+                            <input class="w-12 text-center border mx-2" type="text" value="${product.quantity}" readonly/>
+                            <button onclick="updateQuantity(${index}, 1)" class="px-2 py-1 border" aria-label="Augmenter la quantité">+</button>
+                        </div>
+                    </td>
+                    <td class="py-2 text-green-500">${(product.price * product.quantity)} DH</td>
+                `;
+                cartTable.appendChild(row);
+
+                subTotal += product.price * product.quantity;
+            });
+            const deliveryFee = 35;
+                const discountAmount = subTotal * discount * 0.01;
+                const total = subTotal + deliveryFee - discountAmount;
+    
+                document.getElementById('subTotalAmount').innerText = subTotal + ' DH';
+                document.getElementById('deliveryFee').innerText = deliveryFee + ' DH';
+                document.getElementById('discountAmount').innerText = discountAmount + ' DH';
+                document.getElementById('totalAmount').innerText = total + ' DH';
+            }
+        
+        function updateQuantity(index, change) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart[index].quantity += change;
+
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+        }
+
+        function applyDiscount() {
+            const discountCode = document.getElementById('discountCode').value;
+            if (discountCode === 'PROMO10') {
+                discount = 10;
+            } else if (discountCode === 'PROMO20') {
+                discount = 20;
+            } else {
+                discount = 0;
+                alert('Code de réduction invalide');
+            }
+            loadCart();
+        }
+
+        function sendWhatsAppOrder() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let subTotal = 0;
+            let message = "Bonjour, je souhaite commander les produits suivants :\n\n";
+        
+            cart.forEach(product => {
+                const productTotal = product.price * product.quantity;
+                message += `- ${product.name} : ${product.price} DH x ${product.quantity} = ${productTotal} DH\n`;
+                subTotal += productTotal;
+            });
+        
+            const deliveryFee = 35;
+            const discountAmount = subTotal * discount * 0.01;
+            const total = subTotal + deliveryFee - discountAmount;
+        
+            message += `\nSous-total : ${subTotal} DH`;
+            message += `\nFrais de livraison : ${deliveryFee} DH`;
+            message += `\nRéduction (${discount}%) : ${discountAmount.toFixed(2)} DH`;
+            message += `\nTotal : ${total.toFixed(2)} DH`;
+        
+            const phoneNumber = "+212717707677";
+            const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, "_blank");
+        }
+
+        document.addEventListener('DOMContentLoaded', loadCart);
+    </script>
+</body>
+</html>

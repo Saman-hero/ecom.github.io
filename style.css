@@ -1,0 +1,52 @@
+body {
+    font-family: 'Cairo', sans-serif;
+    background: url('path/to/circuit-background.jpg') no-repeat center center fixed; /* Replace with your circuit background image */
+    background-size: cover;
+    color: #333;
+}
+
+header {
+    background-color: #1a1a1a; /* Darker background for header */
+}
+
+#categoryMenu {
+    display: none;
+}
+
+#categoryMenu.show {
+    display: block;
+}
+
+#searchInput {
+    color: black;
+}
+
+.product {
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    transition: transform 0.2s; /* Smooth transition */
+}
+
+.product:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+button {
+    background-color: #4CAF50; /* Green button */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
