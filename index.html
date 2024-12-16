@@ -33,8 +33,17 @@
             display: block;
         }
 
-        #searchInput {
-            color: black;
+        #searchBarContainer {
+            display: none;
+            background-color: white;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #searchIcon:hover + #searchBarContainer,
+        #searchBarContainer:hover,
+        #searchInput:focus {
+            display: block;
         }
 
         .product {
@@ -143,18 +152,12 @@
 <body class="bg-white text-gray-800">
 <header class="bg-black text-white py-4">
     <div class="container mx-auto flex justify-between items-center px-4">
-        <div class="flex items-center space-x-2">
+        <div class="flex items-center space-x-2 transition-all duration-300" id="logoContainer">
             <img src="raspberry_pi-logo-open_source-raspberry-512-2795733357.png" alt="Raspberry Pi Logo" class="h-8 w-auto" />
             <a href="index.html"><span class="text-lg font-bold">SOF-TECH</span></a>
         </div>
         <div class="flex items-center space-x-4">
-            <div class="relative">
-                <input id="searchInput" class="w-64 p-2 border border-gray-300 rounded" 
-                        placeholder="Chercher des produits" 
-                        type="text" 
-                        aria-label="Recherche de produits" 
-                        oninput="filterProducts(this.value)" />
-            </div>
+            <i id="searchIcon" class="fas fa-search text-yellow-500 cursor-pointer"></i>
             <a class="text-yellow-500" href="#" aria-label="Menu" onclick="toggleCategoryMenu()">
                 <i class="fas fa-bars"></i>
             </a>
@@ -162,10 +165,23 @@
                 <i class="fas fa-shopping-cart"></i>
                 <span id="cartCount" class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs px-1">0</span>
             </a>
-            <button onclick="toggleLanguage()">EN / AR</button>
+            <div class="flex space-x-2">
+                <button onclick="setLanguage('fr')" class="bg-blue-500 text-white py-1 px-2 rounded">FR</button>
+                <button onclick="setLanguage('ar')" class="bg-green-500 text-white py-1 px-2 rounded">AR</button>
+            </div>
         </div>
     </div>
 </header>
+
+<div id="searchBarContainer" class="w-full bg-white shadow-lg p-4">
+    <div class="container mx-auto">
+        <input id="searchInput" class="w-full p-2 border border-gray-300 rounded" 
+                placeholder="Chercher des produits" 
+                type="text" 
+                aria-label="Recherche de produits" 
+                oninput="filterProducts(this.value)" />
+    </div>
+</div>
 
 <nav id="categoryMenu" class="bg-gray-100 p-4 absolute w-full shadow-lg">
     <ul class="space-y-2">
@@ -297,6 +313,8 @@
             'fr': {
                 'addedToCart': 'ajouté au panier.',
                 'close': 'Fermer'
+            
+
             },
             'ar': {
                 'addedToCart': 'تمت إضافته إلى السلة.',
@@ -380,7 +398,6 @@
                 <h2 class="text-lg font-bold mb-2">${product.name}</h2>
                 <p class="text-gray-600 mb-4">${product.price} DH</p>
                 <button class="bg-black text-white py-2 px-4 w-full" onclick="addToCart('${product.name}', ${product.price})" id="addToCartButton">
-                    Ajouter au panier
                 </button>
             </div>
         `;
@@ -410,28 +427,27 @@
         showModal(`${productName} ${getTranslation("addedToCart")}`);
     }
 
-    function toggleLanguage() {
-        const lang = document.documentElement.lang === 'fr' ? 'ar' : 'fr';
+    function setLanguage(lang) {
         document.documentElement.lang = lang;
-
+    
         const textElements = {
             'main-heading': lang === 'fr' ? 'Produits' : 'المنتجات',
             'footer-text': lang === 'fr' ? '© 2024 SOF-TECH. Tous droits réservés.' : '© 2024 SOF-TECH. جميع الحقوق محفوظة.',
             'loadMoreButton': lang === 'fr' ? 'Plus' : 'المزيد',
-            'header-text': lang === 'fr' ? 'Livraison partout à 35 DH' : 'التوصيل لجميع المدن بـ 35 درهم فقط',
             'facebookText': lang === 'fr' ? 'Facebook' : 'فيسبوك',
             'instagramText': lang === 'fr' ? 'Instagram' : 'إنستغرام',
             'modal-message': lang === 'fr' ? 'Produit ajouté au panier.' : 'تم إضافة المنتج إلى السلة.',
             'modal-close-btn': lang === 'fr' ? 'Fermer' : 'إغلاق',
         };
-
+    
         for (let [id, text] of Object.entries(textElements)) {
             const element = document.getElementById(id);
             if (element) {
-                element.textContent = text;
+                element.innerHTML = text; // Corrected this line
             }
         }
     }
+    
 
     document.addEventListener('DOMContentLoaded', () => {
         updateCartCount();
