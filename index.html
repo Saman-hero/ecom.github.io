@@ -1,481 +1,70 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta name="description" content="Découvrez les meilleures offres en ligne pour des produits électroniques tels que Raspberry Pi, Arduino, et accessoires. Livraison rapide prtout au Maroc." />
-    <meta name="keywords" content="Raspberry Pi, Arduino, composants électroniques, accessoires, câbles, matériel informatique, acheter en ligne, livraison rapide, produits électroniques" />
-    <meta name="robots" content="index, follow" />
-    <meta property="og:title" content="SOF-TECH - Composants électroniques et accessoires" />
-    <meta property="og:description" content="SOF-TECH propose une large gamme de produits électroniques et accessoires pour vos projets Raspberry Pi et Arduino. Profitez de la livraison rapide partout au Maroc." />
-    <meta property="og:image" link rel="icon" href="raspberry_pi-logo-open_source-raspberry-512-2795733357.png" />
-
-    <meta property="og:url" content="https://www.sof-tech.com" />
-    <meta name="author" content="SOF-TECH" />
-    <title>SOF-TECH - Composants électroniques, Raspberry Pi et Arduino</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Responsive</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet" />
-    <style>
-        body {
-            font-family: 'Cairo', sans-serif;
-            background: url('path/to/circuit-background.jpg') no-repeat center center fixed; /* Replace with your circuit background image */
-            background-size: cover;
-            color: #333;
-        }
-
-        header {
-            background-color: #1a1a1a; /* Darker background for header */
-        }
-
-        #categoryMenu {
-            display: none;
-        }
-
-        #categoryMenu.show {
-            display: block;
-        }
-
-        #searchInput {
-            color: black;
-        }
-
-        .product {
-            border: 1px solid #ccc; /* Light border */
-            border-radius: 8px; /* Rounded corners */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
-            transition: transform 0.2s; /* Smooth transition */
-        }
-
-        .product:hover {
-            transform: scale(1.05); /* Slight zoom on hover */
-        }
-
-        button {
-            background-color: #4CAF50; /* Green button */
-            border: none;
-            border-radius: 5px;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            transition: background-color 0.3s; /* Smooth transition */
-        }
-        /* Modal Styles */
-.modal {
-    display: none;  /* Hidden by default */
-    position: fixed;  /* Stay in place */
-    z-index: 1;  /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%;  /* Full width */
-    height: 100%;  /* Full height */
-    overflow: auto;  /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.4);  /* Black with transparency */
-    padding-top: 60px;
-}
-
-.modal-content {
-    background-color: #fff;
-    margin: 5% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 500px;
-    text-align: center;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.close {
-    color: #aaa;
-    font-size: 28px;
-    font-weight: bold;
-    position: absolute;
-    top: 0;
-    right: 10px;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-#modal-message {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-}
-
-.close-btn {
-    background-color: #1c1b1b;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.close-btn:hover {
-    background-color: #4CAF50;
-    
-}
-.fixed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: white;
-    padding: 10px;
-    z-index: 10;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-        button:hover {
-            background-color: #45a049; /* Darker green on hover */
-        }
-    </style>
 </head>
-<body class="bg-white text-gray-800">
-<header class="bg-black text-white py-4">
-    <div class="container mx-auto flex justify-between items-center px-4">
-        <div class="text-lg font-bold"id="header-text">
-           التوصيل لجميع المدن بـ 35 درهم فقط
-        </div>
-        <div class="flex items-center space-x-2">
-            <img src="raspberry_pi-logo-open_source-raspberry-512-2795733357.png" alt="Raspberry Pi Logo" class="h-8 w-auto" />
-            <a href="index.html"><span class="text-lg font-bold">SOF-TECH</span></a>
-        </div>
-        <div class="flex items-center space-x-4">
-            <div class="relative">
-                <input id="searchInput" class="w-64 p-2 border border-gray-300 rounded" 
-                        placeholder="Chercher des produits" 
-                        type="text" 
-                        aria-label="Recherche de produits" 
-                        oninput="filterProducts(this.value)" />
-
+<body class="bg-gray-100">
+    <!-- Barre de navigation -->
+    <header class="bg-white shadow">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-lg font-bold cursor-pointer" onclick="window.location.href='index.html'">
+                SOF-TECH
             </div>
-            <a class="text-yellow-500" href="#" aria-label="Menu" onclick="toggleCategoryMenu()">
-                <i class="fas fa-bars"></i>
-            </a>
-            <a class="text-yellow-500 relative" href="cart.html" aria-label="Cart">
-                <i class="fas fa-shopping-cart"></i>
-                <span id="cartCount" class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs px-1">0</span>
-            </a>
-            <button onclick="toggleLanguage()">EN / AR</button>
-            
+            <div class="space-x-4 hidden sm:flex">
+                <a href="#" class="text-gray-700 hover:text-blue-500">Accueil</a>
+                <a href="#" class="text-gray-700 hover:text-blue-500">Produits</a>
+                <a href="#" class="text-gray-700 hover:text-blue-500">Contact</a>
+            </div>
+            <button class="sm:hidden text-gray-700" onclick="toggleMenu()">Menu</button>
+        </nav>
+        <div id="mobileMenu" class="hidden bg-gray-100 sm:hidden">
+            <a href="#" class="block px-4 py-2 text-gray-700 hover:text-blue-500">Accueil</a>
+            <a href="#" class="block px-4 py-2 text-gray-700 hover:text-blue-500">Produits</a>
+            <a href="#" class="block px-4 py-2 text-gray-700 hover:text-blue-500">Contact</a>
         </div>
-    </div>
-</header>
+    </header>
 
-<nav id="categoryMenu" class="bg-gray-100 p-4 absolute w-full shadow-lg">
-    <ul class="space-y-2">
-        <li><button class="w-full text-left" onclick="filterProductsByCategory('Raspberry Pi')">Raspberry Pi</button></li>
-        <li><button class="w-full text-left" onclick="filterProductsByCategory('Arduino')">Arduino</button></li>
-        <li><button class="w-full text-left" onclick="filterProductsByCategory('cables')">Câbles</button></li>
-        <li><button class="w-full text-left" onclick="filterProductsByCategory('moteurs')">Moteurs</button></li>
-        <li><button class="w-full text-left" onclick="filterProductsByCategory('composant electronique')">Composants Électroniques</button></li>
-        <li><button class="w-full text-left" onclick="filterProductsByCategory('matériel de travail')">Matériel de Travail</button></li>
-    </ul>
-</nav>
-
-<main class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold text-center mb-2" id="main-heading">المنتجات</h1>
-    <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
-    <div class="text-center mt-8">
-        <button id="loadMoreButton" class="bg-black text-white py-2 px-4" onclick="loadMoreProducts()">
-            المزيد
-        </button>
-    </div>
-     <!-- Modal -->
-    <div id="popup-modal" class="modal">
-        <div class="modal-content">
-            <span id="close-modal" class="close">&times;</span>
-            <p id="modal-message"></p>
-            <button id="modal-close-btn" class="close-btn">Fermer</button>
-        </div>
-    </div>
-    <!-- Modal -->
-
-
-</main>
-<footer class="bg-gray-800 text-white py-4">
-    <div class="container mx-auto text-center">
-        <p id="footer-text">&copy; 2024 SOF-TECH. جميع الحقوق محفوظة.</p>
-        <div class="mt-2">
-            <a href="https://www.facebook.com/garan.karam" class="text-yellow-500 mx-2" id="facebookText">Facebook </a>
-            <a href="https://www.instagram.com/soulaimanehajji/" class="text-yellow-500 mx-2" id="instagramText">Instagram</a>
-        </div>
-    </div>
-</footer>
-
-<script>
-    let currentProductCount = 4;
-
-    const products = [
-    {
-        name: "Raspberry Pi 4",
-        price: 1190,
-        category: "Raspberry Pi",
-        img: "https://placehold.co/200x300",
-        description: "Un ordinateur monocarte puissant et compact, idéal pour les projets électroniques avancés."
-    },
-    {
-        name: "Arduino Uno",
-        price: 200,
-        category: "Arduino",
-        img: "https://placehold.co/200x300",
-        description: "Une carte microcontrôleur polyvalente pour apprendre et développer des projets électroniques."
-    },
-    {
-        name: "Câble USB",
-        price: 50,
-        category: "cables",
-        img: "https://placehold.co/200x300",
-        description: "Un câble USB durable et fiable, parfait pour connecter vos appareils électroniques."
-    },
-    {
-        name: "Moteur DC",
-        price: 300,
-        category: "moteurs",
-        img: "https://placehold.co/200x300",
-        description: "Un moteur à courant continu pour vos projets robotiques et mécaniques."
-    },
-    {
-        name: "Résistances",
-        price: 20,
-        category: "composant electronique",
-        img: "https://placehold.co/200x300",
-        description: "Un ensemble de résistances pour vos circuits électroniques."
-    },
-    {
-        name: "Fer à souder",
-        price: 500,
-        category: "matériel de travail",
-        img: "https://placehold.co/200x300",
-        description: "Un fer à souder de haute qualité pour assembler et réparer des composants électroniques."
-    },
-    {
-        name: "Raspberry Pi Zero",
-        price: 800,
-        category: "Raspberry Pi",
-        img: "https://placehold.co/200x300",
-        description: "Une version ultra-compacte du Raspberry Pi, idéale pour les projets minimalistes."
-    },
-    {
-        name: "Capteur de température",
-        price: 150,
-        category: "Arduino",
-        img: "https://placehold.co/200x300",
-        description: "Un capteur précis pour mesurer les températures dans vos projets Arduino."
-    }
-    
-];
-
-    function toggleCategoryMenu() {
-        document.getElementById('categoryMenu').classList.toggle('show');
-    }
-    function filterProducts(query) {
-        const filter = query.toLowerCase();
-        const productElements = document.querySelectorAll('.product');
-        let hasResults = false;
-    
-        productElements.forEach(product => {
-            const productName = product.getAttribute('data-name').toLowerCase();
-            if (productName.includes(filter)) {
-                product.style.display = '';
-                hasResults = true;
-            } else {
-                product.style.display = 'none';
-            }
-        });
-    
-        if (!hasResults) {
-            document.getElementById('productGrid').innerHTML = '<p class="text-center text-gray-500">Aucun produit trouvé.</p>';
-        }
-    }
-    
-    function getTranslation(key) {
-        // Dictionary of translations for both languages
-        const translations = {
-            'fr': {
-                'addedToCart': 'ajouté au panier.',
-                'close': 'Fermer'
-            },
-            'ar': {
-                'addedToCart': 'تمت إضافته إلى السلة.',
-                'close': 'إغلاق'
-            }
-        };
-    
-        // Get the current language
-        const lang = document.documentElement.lang;
-    
-        // Return the translation for the key based on the current language
-        return translations[lang] ? translations[lang][key] : translations['fr'][key];
-    }
-    
-    function showModal(message) {
-        // Display the message in the modal
-        document.getElementById("modal-message").textContent = message;
-    
-        // Display the modal
-        document.getElementById("popup-modal").style.display = "block";
-    }
-    
-    // Close the modal when the user clicks the close button
-    document.getElementById("close-modal").addEventListener("click", function() {
-        document.getElementById("popup-modal").style.display = "none";
-    });
-    
-    // Close the modal when the user clicks the "Fermer" button
-    document.getElementById("modal-close-btn").addEventListener("click", function() {
-        document.getElementById("popup-modal").style.display = "none";
-    });
-    
-    // Close the modal if the user clicks outside the modal
-    window.addEventListener("click", function(event) {
-        if (event.target === document.getElementById("popup-modal")) {
-            document.getElementById("popup-modal").style.display = "none";
-        }
-    });
-    
-    
-
-    function filterProductsByCategory(category) {
-        const productGrid = document.getElementById('productGrid');
-        productGrid.innerHTML = ''; // Clear existing products
-        const filteredProducts = products.filter(product => product.category === category);
-
-        filteredProducts.slice(0, currentProductCount).forEach(product => {
-            addProductToGrid(product);
-        });
-
-        document.getElementById('loadMoreButton').style.display = filteredProducts.length > currentProductCount ? 'block' : 'none';
-    }
-    function loadInitialProducts() {
-        const productGrid = document.getElementById('productGrid');
-        productGrid.innerHTML = ''; // Clear existing products
-        products.slice(0, currentProductCount).forEach(product => {
-            addProductToGrid(product);
-        });
-
-        document.getElementById('loadMoreButton').style.display = products.length > currentProductCount ? 'block' : 'none';
-    }
-
-    function loadMoreProducts() {
-        const productGrid = document.getElementById('productGrid');
-        const startIndex = currentProductCount;
-        currentProductCount += 4;
-
-        products.slice(startIndex, currentProductCount).forEach(product => {
-            addProductToGrid(product);
-        });
-
-        if (currentProductCount >= products.length) {
-            document.getElementById('loadMoreButton').style.display = 'none';
-        }
-    }
-
-    // Fonction pour appliquer la traduction à tous les boutons "Ajouter au panier"
-    function translateAddToCartButtons() {
-        const buttons = document.querySelectorAll('#productGrid .product button');
-        const lang = document.documentElement.lang;
-    
-        buttons.forEach(button => {
-            button.textContent = lang === 'fr' ? 'Ajouter au panier' : 'إضافة إلى السلة';
-        });
-    }
-    
-    // Fonction pour ajouter un produit au panier
-    function addProductToGrid(product) {
-        const productGrid = document.getElementById('productGrid');
-        const productElement = `
-            <div class="border p-4 product" data-name="${product.name}" data-price="${product.price}" data-category="${product.category}">
-                <img alt="${product.name}" loading="lazy" class="w-full h-64 object-cover mb-4" src="${product.img}" onerror="this.src='fallback-image.jpg';" />
-                <h2 class="text-lg font-bold mb-2">${product.name}</h2>
-                <p class="text-gray-600 mb-4">${product.price} DH</p>
-                <button class="bg-black text-white py-2 px-4 w-full" onclick="addToCart('${product.name}', ${product.price})" id="addToCartButton">
+    <!-- Section principale -->
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-center mb-8">Nos Produits</h1>
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Exemple de produit -->
+            <div class="bg-white p-4 rounded shadow hover:shadow-lg">
+                <img src="https://via.placeholder.com/150" alt="Produit 1" class="w-full h-40 object-cover rounded">
+                <h2 class="text-lg font-semibold mt-4">Produit 1</h2>
+                <p class="text-gray-600">Description du produit.</p>
+                <button class="bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-600 w-full">
                     Ajouter au panier
                 </button>
             </div>
-        `;
-        productGrid.innerHTML += productElement;
-    
-        // Appliquer la traduction des boutons "Ajouter au panier"
-        translateAddToCartButtons();
-    }
-        
-    function updateCartCount() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-        document.getElementById('cartCount').textContent = count;
-    }
-    
-    function addToCart(productName, productPrice) {
-        
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const existingProduct = cart.find(item => item.name === productName);
-    
-        if (existingProduct) {
-            existingProduct.quantity += 1;
-        } else {
-            cart.push({ name: productName, price: productPrice, quantity: 1 });
+            <div class="bg-white p-4 rounded shadow hover:shadow-lg">
+                <img src="https://via.placeholder.com/150" alt="Produit 2" class="w-full h-40 object-cover rounded">
+                <h2 class="text-lg font-semibold mt-4">Produit 2</h2>
+                <p class="text-gray-600">Description du produit.</p>
+                <button class="bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-600 w-full">
+                    Ajouter au panier
+                </button>
+            </div>
+            <!-- Ajoutez plus de produits ici -->
+        </div>
+    </main>
+
+    <!-- Pied de page -->
+    <footer class="bg-gray-800 text-white py-4">
+        <div class="container mx-auto text-center">
+            &copy; 2024 SOF-TECH. Tous droits réservés.
+        </div>
+    </footer>
+
+    <script>
+        // Gestion du menu burger
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
         }
-    
-        // Save the updated cart to localStorage
-        localStorage.setItem('cart', JSON.stringify(cart));
-    
-        // Update the cart count (function should be defined elsewhere in your code)
-        updateCartCount();
-        showModal(`${productName} ${getTranslation("addedToCart")}`);
-    }
-
-    function toggleLanguage() {
-        const lang = document.documentElement.lang === 'fr' ? 'ar' : 'fr';
-        document.documentElement.lang = lang;
-    
-        const textElements = {
-            'main-heading': lang === 'fr' ? 'Produits' : 'المنتجات',
-            'footer-text': lang === 'fr' ? '© 2024 SOF-TECH. Tous droits réservés.' : '© 2024 SOF-TECH. جميع الحقوق محفوظة.',
-            'loadMoreButton': lang === 'fr' ? 'Plus' : 'المزيد',
-            'header-text': lang === 'fr' ? 'Livraison partout à 35 DH' : 'التوصيل لجميع المدن بـ 35 درهم فقط',
-            'facebookText': lang === 'fr' ? 'Facebook' : 'فيسبوك',
-            'instagramText': lang === 'fr' ? 'Instagram' : 'إنستغرام',
-            'modal-message': lang === 'fr' ? 'Produit ajouté au panier.' : 'تم إضافة المنتج إلى السلة.',
-            'modal-close-btn': lang === 'fr' ? 'Fermer' : 'إغلاق',
-        };
-    
-        // Mettre à jour le texte des éléments en fonction de la langue
-        for (let [id, text] of Object.entries(textElements)) {
-            const element = document.getElementById(id);
-            if (element) {
-                element.textContent = text;
-            }
-        }
-    
-        // Recharger la page ou effectuer d'autres actions nécessaires pour changer la langue de contenu dynamique
-    }
-
-    // Fonction pour appliquer la traduction des boutons "Ajouter au panier"
-    
-
-    
-    document.addEventListener('DOMContentLoaded', () => {
-        updateCartCount();
-        loadInitialProducts();
-    });
-    
-</script>
+    </script>
 </body>
 </html>
-
-
