@@ -157,7 +157,7 @@
             <a href="index.html"><span class="text-lg font-bold">SOF-TECH</span></a>
         </div>
         <div class="flex items-center space-x-4">
-            <i id="searchIcon" class="fas fa-search text-yellow-500 cursor-pointer"></i>
+            <i id="searchIcon" class="fas fa-search text-yellow-500 cursor-pointer" onclick="toggleSearchBar()"></i>
             <a class="text-yellow-500" href="#" aria-label="Menu" onclick="toggleCategoryMenu()">
                 <i class="fas fa-bars"></i>
             </a>
@@ -173,7 +173,7 @@
     </div>
 </header>
 
-<div id="searchBarContainer" class="w-full bg-white shadow-lg p-4">
+<<div id="searchBarContainer" class="w-full bg-white shadow-lg p-4 hidden">
     <div class="container mx-auto">
         <input id="searchInput" class="w-full p-2 border border-gray-300 rounded" 
                 placeholder="Chercher des produits" 
@@ -326,19 +326,6 @@
         return translations[lang] ? translations[lang][key] : translations['fr'][key];
     }
 
-    function showModal(message) {
-        document.getElementById("modal-message").textContent = message;
-        document.getElementById("popup-modal").style.display = "block";
-    }
-
-    document.getElementById("close-modal").addEventListener("click", function() {
-        document.getElementById("popup-modal").style.display = "none";
-    });
-
-    document.getElementById("modal-close-btn").addEventListener("click", function() {
-        document.getElementById("popup-modal").style.display = "none";
-    });
-
     window.addEventListener("click", function(event) {
         if (event.target === document.getElementById("popup-modal")) {
             document.getElementById("popup-modal").style.display = "none";
@@ -412,19 +399,20 @@
         document.getElementById('cartCount').textContent = count;
     }
 
-    function addToCart(productName, productPrice) {
+    function addToCart(productName, productImg, productPrice) {
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         const existingProduct = cart.find(item => item.name === productName);
 
         if (existingProduct) {
             existingProduct.quantity += 1;
         } else {
-            cart.push({ name: productName, price: productPrice, quantity: 1 });
+            cart.push({ Image: productImg, name: productName, price: productPrice, quantity: 1 });
         }
 
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartCount();
-        showModal(`${productName} ${getTranslation("addedToCart")}`);
+        showNotification(`${productName} ${getTranslation("addedToCart")}`);
+        
     }
 
     function setLanguage(lang) {
@@ -447,7 +435,41 @@
             }
         }
     }
+    function showNotification(productName, productImage) {
+        // Create a new notification container
+        const notification = document.createElement('div');
+        notification.classList.add('fixed', 'top-5', 'left-5', 'bg-white', 'text-black', 'flex', 'items-center', 'space-x-4', 'border', 'border-gray-300', 'rounded-lg', 'shadow-lg', 'p-4', 'w-80');
+
     
+        // Create the product image element
+        const productImg = document.createElement('img');
+        productImg.src = productImage;
+        productImg.alt = productName;
+        productImg.classList.add('w-16', 'h-16', 'object-cover', 'rounded');
+    
+        // Create the text content for the notification
+        const textContent = document.createElement('div');
+        const productTitle = document.createElement('p');
+        productTitle.classList.add('font-bold');
+        productTitle.textContent = productName;
+    
+        // Append the image and text to the notification container
+        textContent.appendChild(productTitle);
+        notification.appendChild(productImg);
+        notification.appendChild(textContent);
+    
+        // Append the notification to the body
+        document.body.appendChild(notification);
+    
+        // Remove the notification after 3 seconds
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
+    
+    document.getElementById('searchInput').addEventListener('input', (event) => {
+        filterProducts(event.target.value);
+    });
 
     document.addEventListener('DOMContentLoaded', () => {
         updateCartCount();
