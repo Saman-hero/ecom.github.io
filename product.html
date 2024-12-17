@@ -1,0 +1,368 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="description" content="Découvrez les meilleures offres en ligne pour des produits électroniques tels que Raspberry Pi, Arduino, et accessoires. Livraison rapide prtout au Maroc." />
+    <meta name="keywords" content="Raspberry Pi, Arduino, composants électroniques, accessoires, câbles, matériel informatique, acheter en ligne, livraison rapide, produits électroniques" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="SOF-TECH - Composants électroniques et accessoires" />
+    <meta property="og:description" content="SOF-TECH propose une large gamme de produits électroniques et accessoires pour vos projets Raspberry Pi et Arduino. Profitez de la livraison rapide partout au Maroc." />
+    <meta property="og:image" link rel="icon" href="raspberry_pi-logo-open_source-raspberry-512-2795733357.png" />
+    <meta property="og:url" content="https://www.sof-tech.com" />
+    <meta name="author" content="SOF-TECH" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet" />
+    <title>Product Description</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* General Body Styling */
+body {
+    font-family: 'Cairo', sans-serif;
+    color: #333;
+}
+
+/* Notification Styling */
+.fixed {
+    position: fixed;
+    top: 5%;
+    right: 5%;
+    background-color: white;
+    padding: 10px;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    max-width: 400px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.fixed img {
+    width: 60px;
+    height: 60px;
+    object-cover: true;
+    border-radius: 8px;
+}
+
+.fixed .product-name {
+    font-weight: bold;
+    margin-left: 10px;
+    font-size: 1rem;
+}
+
+/* Button Styling */
+button {
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    right: 10px;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+    </style>
+
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const product = JSON.parse(localStorage.getItem('selectedProduct'));
+            if (product) {
+                document.getElementById('product-name').innerText = product.name;
+                document.getElementById('product-price').innerText = `درهم ${product.price}`;
+                document.getElementById('product-category').innerText = product.category;
+                document.getElementById('product-description').innerText = product.description;
+                document.getElementById('product-img').src = product.img;
+                document.getElementById('product-img').alt = product.name;
+        
+                // Dynamically display product characteristics
+                const characteristicsContainer = document.getElementById('product-tech_Charater');
+                characteristicsContainer.innerHTML = ''; // Clear previous content
+                Object.entries(product.characteristics).forEach(([key, value]) => {
+                    const charItem = document.createElement('div');
+                    charItem.classList.add('mb-2', 'text-gray-700'); // Add Tailwind styles
+                    charItem.innerHTML = `<strong>${key.replace(/_/g, ' ')}:</strong> ${value}`;
+                    characteristicsContainer.appendChild(charItem);
+                });
+            }
+        });
+        // Define translations for both languages (French and Arabic)
+        const translations = {
+            fr: {
+                
+                
+                
+                
+                "add-to-cart": "Ajouter au panier",
+                "modal-message": "Produit ajouté au panier",
+                "footer-text": "© 2024 SOF-TECH. Tous droits réservés.",
+                "facebookText": "Facebook",
+                "instagramText": "Instagram"
+            },
+            ar: {
+                
+                
+                "add-to-cart": "إضافة إلى السلة",
+                "modal-message": "تم إضافة المنتج إلى السلة",
+                "footer-text": "© 2024 SOF-TECH. جميع الحقوق محفوظة.",
+                "facebookText": "فيسبوك",
+                "instagramText": "إنستجرام"
+            }
+        };
+        
+        // Function to change the language
+        function changeLanguage(language) {
+            // Get all translatable elements
+            const elements = document.querySelectorAll('[id]');
+            
+            elements.forEach(element => {
+                const key = element.id;
+                if (translations[language] && translations[language][key]) {
+                    element.textContent = translations[language][key];
+                }
+            });
+        
+            // Update button text
+            translateAddToCartButtons(language);
+        }
+        
+        // Function to update the text of the 'Add to Cart' buttons
+        function translateAddToCartButtons(language) {
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                if (button.textContent.includes('Ajouter au panier') || button.textContent.includes('إضافة إلى السلة')) {
+                    button.textContent = translations[language]["add-to-cart"];
+                }
+            });
+        }
+        
+        // Set default language to French on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            changeLanguage('fr');  // You can change this to 'ar' for default Arabic language
+        });
+        
+
+
+        
+    
+        // Mettre à jour le compteur du panier
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartCount').textContent = count;
+        }
+    
+        // Afficher la notification d'ajout au panier
+        
+        function showNotification(productName, productImage) {
+            // Create a new notification container
+            const notification = document.createElement('div');
+            notification.classList.add(
+                'fixed', 'top-5', 'right-5', 'bg-white', 'text-black', 'flex', 'items-center', 
+                'space-x-4', 'border', 'border-gray-300', 'rounded-lg', 'shadow-lg', 'p-4', 'w-80', 
+                'opacity-0', 'transition-opacity', 'duration-500'
+            );
+        
+            // Create the product image element
+            const productImg = document.createElement('img');
+            productImg.src = productImage;
+            productImg.alt = productName;
+            productImg.classList.add('w-16', 'h-16', 'object-cover', 'rounded');
+        
+            // Create the text content for the notification
+            const textContent = document.createElement('div');
+            const productTitle = document.createElement('p');
+            productTitle.classList.add('font-bold');
+            productTitle.textContent = productName;
+        
+            // Append the image and text to the notification container
+            textContent.appendChild(productTitle);
+            notification.appendChild(productImg);
+            notification.appendChild(textContent);
+        
+            // Append the notification to the body
+            document.body.appendChild(notification);
+        
+            // Trigger fade-in effect by removing opacity
+            setTimeout(() => {
+                notification.classList.remove('opacity-0');
+            }, 10);
+        
+            // Remove the notification after 3 seconds
+            setTimeout(() => {
+                notification.classList.add('opacity-0');
+                setTimeout(() => {
+                    notification.remove();
+                }, 500); // Wait for fade-out to finish
+            }, 3000);
+        }
+        
+    
+        // Ajouter un produit au panier
+        function addToCart() {
+            const product = JSON.parse(localStorage.getItem('selectedProduct'));
+        
+            if (product) {
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const existingProduct = cart.find(item => item.name === product.name);
+        
+                if (existingProduct) {
+                    existingProduct.quantity += 1;
+                } else {
+                    cart.push({ Image: product.img, name: product.name, price: product.price, quantity: 1 });
+                }
+        
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartCount();
+                showNotification(`${product.name} a été ajouté au panier.`, product.img);
+            }
+        }
+        
+        </script>
+   
+</head>
+<body class="bg-white text-gray-800">
+    <header class="bg-black text-white py-4">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <div class="flex items-center space-x-2 transition-all duration-300" id="logoContainer">
+                <img src="raspberry_pi-logo-open_source-raspberry-512-2795733357.png" alt="Raspberry Pi Logo" class="h-8 w-auto" />
+                <a href="index.html"><span class="text-lg font-bold">SOF-TECH</span></a>
+            </div>
+            <div class="flex items-center space-x-4">
+                
+                <a class="text-yellow-500 relative" href="cart.html" aria-label="Cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cartCount" class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs px-1">0</span>
+                </a>
+                <div class="flex space-x-2">
+                    <button onclick="changeLanguage('fr')" class="bg-blue-500 text-white py-1 px-2 rounded">FR</button>
+                    <button onclick="changeLanguage('ar')" class="bg-green-500 text-white py-1 px-2 rounded">AR</button>
+                </div>
+                
+    </header>
+    <div class="container mx-auto py-4">
+        <div class="flex justify-center">
+            <input type="text" id="search-input" placeholder="Search for products..." class="border border-gray-300 rounded py-2 px-4 w-1/2" oninput="searchProducts()">
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto py-8 px-4">
+        <!-- Product Information -->
+        <div class="flex flex-col md:flex-row items-center md:space-x-12">
+            <!-- Product Image -->
+            <div class="w-full md:w-1/2 flex justify-center">
+                <img id="product-img" alt="Product Image"
+                    class="rounded-lg shadow-lg w-full h-auto object-cover max-w-md">
+            </div>
+    
+            <!-- Product Details -->
+            <div class="w-full md:w-1/2 mt-6 md:mt-0">
+                <h1 id="product-name" class="text-4xl font-bold text-blue-800 mb-4"></h1>
+    
+                <div class="mb-4">
+                    <span class="text-gray-500">Category:</span>
+                    <span id="product-category" class="font-semibold text-gray-700 ml-2"></span>
+                </div>
+    
+                <div id="product-price" class="text-3xl font-bold text-green-600 mb-6"></div>
+    
+                <p id="product-description" class="text-gray-700 leading-relaxed mb-6"></p>
+    
+                <!-- Star Ratings -->
+                <div class="flex items-center mb-6">
+                    <span class="text-yellow-500 text-2xl">
+                        ★★★★☆
+                    </span>
+                    <span class="ml-2 text-gray-500">(120 reviews)</span>
+                </div>
+    
+                <!-- Add to Cart Button -->
+                <button 
+                    onclick="addToCart()" 
+                    class="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300 shadow-md">
+                    <i class="fas fa-shopping-cart mr-2"></i> Ajouter au panier
+                </button>
+
+            
+                
+            </div>
+        </div>
+    
+        <!-- Technical Characteristics Section -->
+        <div class="mt-12">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Caractéristiques Techniques</h2>
+            <div id="product-tech_Charater"
+                class="flex flex-col space-y-4 text-gray-700">
+                <!-- Dynamically populated using JavaScript -->
+            </div>
+        </div>
+        
+    </main>
+    
+    <footer class="bg-gray-800 text-white py-4">
+        <div class="container mx-auto text-center">
+            <p id="footer-text">&copy; 2024 SOF-TECH. جميع الحقوق محفوظة.</p>
+            <div class="mt-2">
+                <a href="https://www.facebook.com/garan.karam" class="text-yellow-500 mx-2" id="facebookText">Facebook</a>
+                <a href="https://www.instagram.com/soulaimanehajji/" class="text-yellow-500 mx-2" id="instagramText">Instagram</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
