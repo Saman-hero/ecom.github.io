@@ -26,12 +26,44 @@
         }
 
         #categoryMenu {
-            display: none;
+            display: none; /* Hidden by default */
+            position: absolute;
+            top: 50px; /* Adjust based on your layout */
+            right: 0;
+            width: 200px;
+            background-color: #f9fafb;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-
+        
         #categoryMenu.show {
-            display: block;
+            display: block; /* Show the menu when 'show' class is added */
         }
+        
+        #menuIcon {
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        #menuIcon:hover {
+            transform: scale(1.1); /* Slightly enlarge the icon on hover */
+        }
+        
+        #categoryMenu button {
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            padding: 10px;
+            color: #333;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        #categoryMenu button:hover {
+            background-color: #e2e8f0; /* Light gray background on hover */
+        }
+        
 
         #searchBarContainer {
             display: none;
@@ -45,6 +77,7 @@
         #searchInput:focus {
             display: block;
         }
+
 
         .product {
             border: 1px solid #ccc;
@@ -72,31 +105,6 @@
             transition: background-color 0.3s;
         }
 
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
-            padding-top: 60px;
-        }
-
-        .modal-content {
-            background-color: #fff;
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 500px;
-            text-align: center;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
         .close {
             color: #aaa;
             font-size: 28px;
@@ -113,21 +121,7 @@
             cursor: pointer;
         }
 
-        #modal-message {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-        }
-
-        .close-btn {
-            background-color: #1c1b1b;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+       
 
         .close-btn:hover {
             background-color: #4CAF50;
@@ -147,6 +141,49 @@
         button:hover {
             background-color: #45a049;
         }
+
+        /* Notification Container */
+        .notification {
+            position: fixed; /* Position fixed to keep it on screen */
+            top: 20px; /* Adjust top spacing */
+            right: 20px; /* Position it to the right */
+            background-color: #f4fef5; /* Green background color */
+            color:#333; /* White text */
+            padding: 15px 20px; /* Add some padding */
+            border-radius: 5px; /* Slight rounded corners */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Drop shadow */
+            z-index: 1000; /* Ensure it's above other elements */
+            font-family: 'Cairo', sans-serif;
+            font-weight: bold;
+            display: none; /* Initially hidden */
+            animation: slideInRight 0.5s ease forwards; /* Animation effect */
+        }
+        
+        
+        /* Slide-In Animation */
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%); /* Start from the right outside the screen */
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0); /* Move to its original position */
+                opacity: 1;
+            }
+        }
+        
+        /* Optional: Slide-Out Animation */
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+        
     </style>
 </head>
 <body class="bg-white text-gray-800">
@@ -158,9 +195,23 @@
         </div>
         <div class="flex items-center space-x-4">
             <i id="searchIcon" class="fas fa-search text-yellow-500 cursor-pointer" onclick="toggleSearchBar()"></i>
-            <a class="text-yellow-500" href="#" aria-label="Menu" onclick="toggleCategoryMenu()">
+            <a id="menuIcon" class="text-yellow-500" href="#" aria-label="Menu" onmouseover="toggleCategoryMenu(true)" onmouseout="handleMouseOut()">
                 <i class="fas fa-bars"></i>
             </a>
+            
+            <div id="menuContainer" onmouseover="toggleCategoryMenu(true)" onmouseout="handleMouseOut()">
+                <nav id="categoryMenu" class="bg-gray-100 p-4 absolute w-full shadow-lg hidden">
+                    <ul class="space-y-2">
+                        <li><button class="w-full text-left" onclick="filterProductsByCategory('Raspberry Pi')">Raspberry Pi</button></li>
+                        <li><button class="w-full text-left" onclick="filterProductsByCategory('Arduino')">Arduino</button></li>
+                        <li><button class="w-full text-left" onclick="filterProductsByCategory('cables')">Câbles</button></li>
+                        <li><button class="w-full text-left" onclick="filterProductsByCategory('moteurs')">Moteurs</button></li>
+                        <li><button class="w-full text-left" onclick="filterProductsByCategory('composant electronique')">Composants Électroniques</button></li>
+                        <li><button class="w-full text-left" onclick="filterProductsByCategory('matériel de travail')">Matériel de Travail</button></li>
+                    </ul>
+                </nav>
+            </div>
+            
             <a class="text-yellow-500 relative" href="cart.html" aria-label="Cart">
                 <i class="fas fa-shopping-cart"></i>
                 <span id="cartCount" class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs px-1">0</span>
@@ -173,7 +224,7 @@
     </div>
 </header>
 
-<<div id="searchBarContainer" class="w-full bg-white shadow-lg p-4 hidden">
+<div id="searchBarContainer" class="w-full bg-white shadow-lg p-4 hidden">
     <div class="container mx-auto">
         <input id="searchInput" class="w-full p-2 border border-gray-300 rounded" 
                 placeholder="Chercher des produits" 
@@ -183,16 +234,7 @@
     </div>
 </div>
 
-<nav id="categoryMenu" class="bg-gray-100 p-4 absolute w-full shadow-lg">
-    <ul class="space-y-2">
-        <li><button class="w-full text-left" onclick="filterProductsByCategory('Raspberry Pi')">Raspberry Pi</button></li>
-        <li><button class="w-full text-left" onclick="filterProductsByCategory('Arduino')">Arduino</button></li>
-        <li><button class="w-full text-left" onclick="filterProductsByCategory('cables')">Câbles</button></li>
-        <li><button class="w-full text-left" onclick="filterProductsByCategory('moteurs')">Moteurs</button></li>
-        <li><button class="w-full text-left" onclick="filterProductsByCategory('composant electronique')">Composants Électroniques</button></li>
-        <li><button class="w-full text-left" onclick="filterProductsByCategory('matériel de travail')">Matériel de Travail</button></li>
-    </ul>
-</nav>
+
 
 <main class="container mx-auto px-4 py-8">
     <h1 class="text-3xl font-bold text-center mb-2" id="main-heading">المنتجات</h1>
@@ -202,14 +244,17 @@
             المزيد
         </button>
     </div>
-    <!-- Modal -->
-    <div id="popup-modal" class="modal">
-        <div class="modal-content">
-            <span id="close-modal" class="close">&times;</span>
-            <p id="modal-message"></p>
-            <button id="modal-close-btn" class="close-btn">Fermer</button>
-        </div>
+
+
+
+
+    <div id="notification" class="notification">
+        <span id="notificationMessage">Produit ajouté au panier !</span>
+        <span class="close-btn" onclick="hideNotification()">×</span>
     </div>
+
+
+    
     <!-- Modal -->
 </main>
 <footer class="bg-gray-800 text-white py-4">
@@ -230,7 +275,7 @@
             name: "Raspberry Pi 4",
             price: 1190,
             category: "Raspberry Pi",
-            img: "https://placehold.co/200x300",
+            img: "RAspberry_Pi_4.png",
             description: "Un ordinateur monocarte puissant et compact, idéal pour les projets électroniques avancés."
         },
         {
@@ -284,9 +329,28 @@
         }
     ];
 
-    function toggleCategoryMenu() {
-        document.getElementById('categoryMenu').classList.toggle('show');
+    let menuVisible = false;
+
+function toggleCategoryMenu(show) {
+    const menu = document.getElementById('categoryMenu');
+    if (show) {
+        menu.classList.add('show'); // Show the menu
+        menuVisible = true; // Set the menu as visible
+    } else {
+        menu.classList.remove('show'); // Hide the menu
+        menuVisible = false; // Set the menu as hidden
     }
+}
+
+// Handle mouseout event
+function handleMouseOut() {
+    // Only hide the menu if the cursor is not over the menu or the icon
+    setTimeout(() => {
+        if (!menuVisible) {
+            document.getElementById('categoryMenu').classList.remove('show');
+        }
+    }, 200); // Short delay to avoid immediate disappearance
+}
 
     function filterProducts(query) {
         const filter = query.toLowerCase();
@@ -406,12 +470,14 @@
         if (existingProduct) {
             existingProduct.quantity += 1;
         } else {
-            cart.push({ Image: productImg, name: productName, price: productPrice, quantity: 1 });
+            cart.push({ img: productImage, name: productName, price: productPrice, quantity: 1 });
         }
 
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartCount();
         showNotification(`${productName} ${getTranslation("addedToCart")}`);
+       
+
         
     }
 
@@ -435,38 +501,29 @@
             }
         }
     }
-    function showNotification(productName, productImage) {
-        // Create a new notification container
-        const notification = document.createElement('div');
-        notification.classList.add('fixed', 'top-5', 'left-5', 'bg-white', 'text-black', 'flex', 'items-center', 'space-x-4', 'border', 'border-gray-300', 'rounded-lg', 'shadow-lg', 'p-4', 'w-80');
-
+   
+    function showNotification(message) {
+        const notification = document.getElementById('notification');
+        const messageSpan = document.getElementById('notificationMessage');
+        messageSpan.textContent = message;
     
-        // Create the product image element
-        const productImg = document.createElement('img');
-        productImg.src = productImage;
-        productImg.alt = productName;
-        productImg.classList.add('w-16', 'h-16', 'object-cover', 'rounded');
+        notification.style.display = 'block';
     
-        // Create the text content for the notification
-        const textContent = document.createElement('div');
-        const productTitle = document.createElement('p');
-        productTitle.classList.add('font-bold');
-        productTitle.textContent = productName;
-    
-        // Append the image and text to the notification container
-        textContent.appendChild(productTitle);
-        notification.appendChild(productImg);
-        notification.appendChild(textContent);
-    
-        // Append the notification to the body
-        document.body.appendChild(notification);
-    
-        // Remove the notification after 3 seconds
+        // Hide after 3 seconds
         setTimeout(() => {
-            notification.remove();
+            hideNotification();
         }, 3000);
     }
     
+    function hideNotification() {
+        const notification = document.getElementById('notification');
+        notification.style.animation = 'slideOutRight 0.5s ease forwards';
+        setTimeout(() => {
+            notification.style.display = 'none';
+            notification.style.animation = 'slideInRight 0.5s ease forwards';
+        }, 500);
+    }
+
     document.getElementById('searchInput').addEventListener('input', (event) => {
         filterProducts(event.target.value);
     });
